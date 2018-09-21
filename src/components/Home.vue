@@ -35,22 +35,9 @@
 
 <script>
 export default {
-  data () {
-    return {
-      meetups: [
-        {
-          imageUrl:
-            'https://cdn.pixabay.com/photo/2016/08/13/03/01/new-york-1590175_960_720.jpg',
-          id: 'asdaffassd',
-          title: 'Meetup in New York'
-        },
-        {
-          imageUrl:
-            'https://cdn.pixabay.com/photo/2016/11/18/19/01/paris-1836415_960_720.jpg',
-          id: 'asdfasdvcf',
-          title: 'Meetup in Paris'
-        }
-      ]
+  computed: {
+    meetups () {
+      return this.$store.getters.featuredMeetups
     }
   },
   methods: {
