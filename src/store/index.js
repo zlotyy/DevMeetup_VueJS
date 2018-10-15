@@ -13,7 +13,7 @@ export const store = new Vuex.Store({
         title: 'Meetup in New York',
         date: '2018-09-22',
         description: 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dolor alias mollitia distinctio corporis.',
-        place: 'New York'
+        location: 'New York'
       },
       {
         imageUrl:
@@ -22,7 +22,7 @@ export const store = new Vuex.Store({
         title: 'Meetup in Paris',
         date: '2018-09-25',
         description: 'Deleniti similique reiciendis asperiores temporibus reprehenderit neque omnis libero!',
-        place: 'Paris'
+        location: 'Paris'
       }
     ],
     user: {

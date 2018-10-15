@@ -62,13 +62,13 @@
                     <v-layout row class="mb-2">
                         <v-flex xs12 sm6 offset-sm3>
                             <v-date-picker v-model="date"></v-date-picker>
-                            <!-- <p>{{ date }}</p> -->
+                            <p>{{ date }}</p>
                         </v-flex>
                     </v-layout>
                     <v-layout row>
                         <v-flex xs12 sm6 offset-sm3>
-                            <v-time-picker v-model="time"></v-time-picker>
-                            <!-- <p>{{ time }}</p> -->
+                            <v-time-picker v-model="time" format="24hr"></v-time-picker>
+                            <p>{{ time }}</p>
                         </v-flex>
                     </v-layout>
                     <v-layout row>
@@ -77,6 +77,7 @@
                             class="primary"
                             :disabled="!formIsValid"
                             type="submit">Create Meetup</v-btn>
+                            {{ submittableDateTime }}
                         </v-flex>
                     </v-layout>
                 </form>
@@ -93,8 +94,8 @@
         location: '',
         imageUrl: '',
         description: '',
-        date: null,
-        time: null
+        date: new Date().toJSON().split('T')[0],
+        time: new Date().toTimeString().slice(0, 5)
       }
     },
     computed: {
@@ -103,6 +104,13 @@
         this.location !== '' &&
         this.imageUrl !== '' &&
         this.description !== ''
+      },
+      submittableDateTime () {
+        const date = new Date(this.date)
+        date.setHours(parseInt(this.time.match(/^(\d+)/)[1]))
+        date.setMinutes(parseInt(this.time.match(/:(\d+)/)[1]))
+        console.log(date)
+        return date
       }
     },
     methods: {
@@ -115,7 +123,7 @@
           location: this.location,
           imageUrl: this.imageUrl,
           description: this.description,
-          date: new Date()
+          date: this.submittableDateTime
         }
         this.$store.dispatch('createMeetup', meetupData)
         this.$router.push('/meetups')
